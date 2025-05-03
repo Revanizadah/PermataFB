@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Sidebar styling */
-        .sidebar {
+      /* Sidebar styling */
+      .sidebar {
             width: 250px;
             height: 100vh;
             position: fixed;
@@ -27,8 +27,31 @@
             text-decoration: none;
         }
 
+        /* Styling untuk dropdown */
+        .sidebar .accordion-button {
+            background-color: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            text-align: left;
+            width: 100%;
+            cursor: pointer;
+        }
+
         .sidebar a:hover {
             background-color: #34495e;
+        }
+
+        /* Styling untuk item dalam dropdown */
+        .sidebar .accordion-collapse a {
+            padding: 10px 15px;
+            background-color: #34495e;
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar .accordion-collapse a:hover {
+            background-color: #2c3e50;
         }
 
         /* Main content area */
@@ -64,21 +87,6 @@
             background-color: #e74c3c;
         }
 
-        /* Dropdown styling */
-        .dropdown-menu {
-            display: none;
-            padding: 10px;
-        }
-
-        .dropdown-menu.active {
-            display: block;
-        }
-
-        .accordion-button {
-            background-color: #2980b9;
-            color: white;
-            border: none;
-        }
     </style>
 </head>
 
@@ -129,6 +137,16 @@
 
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Inisialisasi semua elemen dengan class .accordion-button untuk menjadi collapsible
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Cek apakah tombol yang di-klik sudah membuka dropdown
+                const collapseElement = this.nextElementSibling;
+                collapseElement.classList.toggle('show');
+            });
+        });
+    </script>
 
 </body>
 

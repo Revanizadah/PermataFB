@@ -82,7 +82,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             const today = new Date();
             const tomorrow = new Date(today);
-            tomorrow.setDate(today.getDate() + 1); // Besok
+            tomorrow.setDate(today.getDate() + 2); // Besok
 
             const dateInput = document.getElementById('tanggal');
             const formattedToday = today.toISOString().split('T')[0];

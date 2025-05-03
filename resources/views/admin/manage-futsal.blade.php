@@ -24,23 +24,7 @@
             <label class="font-semibold">Jam</label>
             <div class="d-flex flex-wrap mt-2">
                 @foreach(['07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'] as $jam)
-                    @php
-                        // Mengambil status pemesanan lapangan pada waktu tertentu
-                        $status = 'available'; // Default status
-                        $booking = \App\Models\FieldBooking::where('booking_time', $jam)
-                            ->where('field_type', 'futsal')
-                            ->where('status', 'approved') // Pastikan status sudah approved
-                            ->first();
-                        if ($booking) {
-                            $status = 'booked'; // Sudah dipesan
-                        }
-                    @endphp
-
-                    <!-- Tombol untuk memilih jam -->
-                    <button class="btn m-1 @if($status == 'available') btn-success @elseif($status == 'booked') btn-secondary @else btn-light @endif"
-                            @if($status == 'booked') disabled @endif>
-                        {{ $jam }}
-                    </button>
+                <button class="btn btn-light m-1" {{ $jam == '08:00' ? 'disabled' : '' }}>{{ $jam }}</button>
                 @endforeach
             </div>
         </div>
@@ -106,7 +90,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             const today = new Date();
             const tomorrow = new Date(today);
-            tomorrow.setDate(today.getDate() + 1); // Besok
+            tomorrow.setDate(today.getDate() + 2); // Besok
 
             const dateInput = document.getElementById('tanggal');
             const formattedToday = today.toISOString().split('T')[0];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Reservation;
 
 class AdminController extends Controller
 {
@@ -85,6 +86,22 @@ class AdminController extends Controller
 
     public function reports()
     {
-        return view('admin.reports');
+        // Ambil data pemesanan dari kedua lapangan
+        $reservations = Reservation::with('field')->get(); // Mengambil semua pemesanan lapangan
+        return view('admin.reports', compact('reservations'));
+    }
+
+    // Export ke PDF
+    public function exportPdf()
+    {
+        $reservations = Reservation::with('field')->get();
+        $pdf = PDF::loadView('admin.reports-pdf', compact('reservations'));
+        return $pdf->download('laporan_pesanan.pdf');
+    }
+
+    // Export ke Excel
+    public function exportExcel()
+    {
+        return Excel::download(new ReservationsExport, 'laporan_pesanan.xlsx');
     }
 }

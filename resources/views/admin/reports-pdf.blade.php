@@ -1,17 +1,25 @@
-@extends('admin.layout')
-
-@section('content')
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Laporan Pesanan</h2>
-
-    <!-- Pilih Tanggal -->
-    <div class="mb-4">
-        <label for="tanggal" class="font-semibold">Tanggal</label>
-        <input type="date" id="tanggal" class="form-control w-25" />
-    </div>
-
-    <!-- Tabel Laporan -->
-    <table class="table table-bordered">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Laporan Pesanan</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>Laporan Pesanan</h2>
+    <table>
         <thead>
             <tr>
                 <th>No</th>
@@ -34,22 +42,16 @@
                 <td>{{ $reservation->field->name }}</td>
                 <td>
                     @if($reservation->status == 'approved')
-                    <span class="badge bg-success">Diterima</span>
+                    Diterima
                     @elseif($reservation->status == 'rejected')
-                    <span class="badge bg-danger">Ditolak</span>
+                    Ditolak
                     @else
-                    <span class="badge bg-warning">Menunggu</span>
+                    Menunggu
                     @endif
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-
-    <!-- Button Export -->
-    <div class="mt-4">
-        <a href="{{ route('admin.reports.pdf') }}" class="btn btn-danger">Export to PDF</a>
-        <a href="{{ route('admin.reports.excel') }}" class="btn btn-success">Export to Excel</a>
-    </div>
-</div>
-@endsection
+</body>
+</html>
