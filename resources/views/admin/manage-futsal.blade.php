@@ -31,6 +31,16 @@
             <p>Lapangan Multicort biasanya terbuat dari campuran karet dan vinyl yang memberikan permukaan yang lebih keras dan licin.</p>
         </div>
 
+       <!-- Form Nama Pemesan dan Nomor HP (Hanya tampil jika lapangan dipilih) -->
+        <div class="mb-5" id="pemesan-section" style="display: none;">
+            <label for="nama_pemesan" class="font-semibold">Nama Pemesan</label>
+            <input type="text" id="nama_pemesan" class="form-control mt-2 w-48" />
+
+            <label for="no_hp" class="font-semibold mt-3">Nomor HP Pemesan</label>
+            <input type="text" id="no_hp" class="form-control mt-2 w-48" />
+        </div>
+
+
         <!-- Pilihan Jam -->
         <div class="mb-5" id="jam-section" style="display:none;">
             <label class="font-semibold">Jam</label>
@@ -41,10 +51,8 @@
             </div>
         </div>
 
-        <!-- Tombol OFF -->
-        <div id="off-section" style="display:none;">
-            <button class="btn btn-danger" onclick="offLapangan()">OFF</button>
-        </div>
+       <!-- Tombol Pemesanan -->
+       <button class="btn btn-primary" onclick="simpanPemesanan()">Pesan Lapangan</button>
     </div>
 
     <!-- Inline CSS untuk styling -->
@@ -118,29 +126,29 @@
             const lapanganMulticortDiv = document.getElementById('lapanganMulticortDiv');
             const jamSection = document.getElementById('jam-section');
             const offSection = document.getElementById('off-section');
+            const pemesanSection = document.getElementById('pemesan-section');
 
             // Menyembunyikan semua div lapangan
             lapanganSintetisDiv.style.display = 'none';
             lapanganMulticortDiv.style.display = 'none';
             jamSection.style.display = 'none';
             offSection.style.display = 'none';
+            pemesanSection.style.display = 'none'; // Menyembunyikan form pemesan
 
             // Tampilkan div sesuai dengan lapangan yang dipilih
             if (lapangan === 'sintetis') {
                 lapanganSintetisDiv.style.display = 'block';
                 jamSection.style.display = 'block'; // Tampilkan pilihan jam
-                offSection.style.display = 'block'; // Tampilkan tombol OFF
+                offSection.style.display = 'block'; // Tampilkan tombol Simpan Pesanan
+                pemesanSection.style.display = 'block'; // Tampilkan form pemesan
             } else if (lapangan === 'multicort') {
                 lapanganMulticortDiv.style.display = 'block';
                 jamSection.style.display = 'block'; // Tampilkan pilihan jam
-                offSection.style.display = 'block'; // Tampilkan tombol OFF
+                offSection.style.display = 'block'; // Tampilkan tombol Simpan Pesanan
+                pemesanSection.style.display = 'block'; // Tampilkan form pemesan
             }
         }
 
-        // Fungsi untuk mematikan lapangan
-        function offLapangan() {
-            alert("Lapangan telah dimatikan.");
-            // Tindakan lebih lanjut bisa ditambahkan sesuai kebutuhan
-        }
+
     </script>
 @endsection

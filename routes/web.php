@@ -45,6 +45,10 @@ Route::get('/', function () {
     Route::get('/admin/manage-fields/futsal', [AdminController::class, 'manageFutsal'])->name('admin.manage.futsal');
     Route::get('/admin/manage-fields/badminton', [AdminController::class, 'manageBadminton'])->name('admin.manage.badminton');
     Route::get('/admin/reports', [AdminController::class, 'reports'])->name('admin.reports');
+    // Tambahkan route di `web.php` untuk menerima pemesanan dari admin
+    Route::post('/admin/pemesanan', [AdminController::class, 'storeBooking'])->name('admin.store.booking');
+
+
 
     // Rute untuk menerima pemesanan
     Route::get('/admin/manage-reception/accept/{id}', [AdminController::class, 'acceptReservation'])->name('admin.accept');

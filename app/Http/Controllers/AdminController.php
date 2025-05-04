@@ -84,6 +84,35 @@ class AdminController extends Controller
         return redirect()->route('admin.manage.badminton')->with('success', 'Lapangan Badminton berhasil ditambahkan.');
     }
 
+
+        public function storeBooking(Request $request)
+        {
+            $request->validate([
+                'nama_pemesan' => 'required|string|max:255',
+                'no_hp' => 'required|string|max:15',
+                'lapangan' => 'required|string|in:Futsal-Sintetis,Futsal-Multicort,Badminton', // Menambahkan validasi untuk lapangan
+                'tanggal' => 'required|date',
+                'jam' => 'required|string',
+            ]);
+
+            // Menyimpan pemesanan lapangan ke database
+            FieldBooking::create([
+                'nama_pemesan' => $request->nama_pemesan,
+                'no_hp' => $request->no_hp,
+                'lapangan' => $request->lapangan,
+                'tanggal' => $request->tanggal,
+                'jam' => $request->jam,
+            ]);
+
+            return response()->json(['message' => 'Pemesanan berhasil'], 200);
+        }
+
+        public function showReports()
+        {
+            $reservations = FieldBooking::all();
+            return view('admin.reports', compact('reservations'));
+        }
+
     public function reports()
     {
         // Ambil data pemesanan dari kedua lapangan

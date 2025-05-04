@@ -11,45 +11,37 @@
     </div>
 
     <!-- Tabel Laporan -->
-    <table class="table table-bordered">
+    <table class="table">
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama</th>
-                <th>No HP</th>
+                <th>Nama Pemesan</th>
+                <th>Nomor HP</th>
                 <th>Tanggal</th>
-                <th>Jam</th>
                 <th>Lapangan</th>
-                <th>Status</th>
+                <th>Jam</th>
             </tr>
         </thead>
         <tbody>
             @foreach($reservations as $reservation)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $reservation->user->name }}</td>
-                <td>{{ $reservation->user->phone_number }}</td>
-                <td>{{ \Carbon\Carbon::parse($reservation->reservation_date)->format('d - m - Y') }}</td>
-                <td>{{ $reservation->start_time }}</td>
-                <td>{{ $reservation->field->name }}</td>
-                <td>
-                    @if($reservation->status == 'approved')
-                    <span class="badge bg-success">Diterima</span>
-                    @elseif($reservation->status == 'rejected')
-                    <span class="badge bg-danger">Ditolak</span>
-                    @else
-                    <span class="badge bg-warning">Menunggu</span>
-                    @endif
-                </td>
-            </tr>
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $reservation->nama_pemesan }}</td>
+                    <td>{{ $reservation->no_hp }}</td>
+                    <td>{{ \Carbon\Carbon::parse($reservation->tanggal)->format('d/m/Y') }}</td>
+                    <td>{{ $reservation->lapangan }}</td>
+                    <td>{{ $reservation->jam }}</td>
+                </tr>
             @endforeach
         </tbody>
     </table>
+
 
     <!-- Button Export -->
     <div class="mt-4">
         <a href="{{ route('admin.reports.pdf') }}" class="btn btn-danger">Export to PDF</a>
         <a href="{{ route('admin.reports.excel') }}" class="btn btn-success">Export to Excel</a>
     </div>
+
 </div>
 @endsection
